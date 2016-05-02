@@ -1,6 +1,6 @@
 <template id="page-1-template">
   <div>
-    <h1>Talking points and message box</h1>
+    <p>Talking points and comment box here</p>
   </div>
 </template>
 

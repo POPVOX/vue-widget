@@ -1,10 +1,16 @@
 export default {
 	currentView: 'Page1',
 
+	widgetHeader: {
+		headline: 'This is the headline for Page1',
+		subHead: 'And this will be the subheadline for Page1'
+	},
+
 	widgetData: {
 		billTitle: '',
 		position: '',
-		customLetter: ''
+		customLetter: '',
+		talkingPoints: ''
 	},
 
 	addressData: {

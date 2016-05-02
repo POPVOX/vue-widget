@@ -1,6 +1,6 @@
 <template id="page-2-template">
   <div>
-    <h1>Name and address info</h1>
+    <p>Name and address info</p>
   </div>
 </template>
 
