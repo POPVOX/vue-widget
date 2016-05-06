@@ -1,36 +1,54 @@
 export default {
-	currentView: 'Page1',
+
+	loading: true,
+	active: true,
+	sandbox: false,
+	onAllowedUrl: true,
+	userLoggedIn: false,
+	allViews: ['Page1', 'Page2', 'Page3', 'Page4', 'Page5'],
+	currentView: '',
+	currentIndex: 0,
 
 	widgetHeader: {
-		headline: 'This is the headline for Page1',
-		subHead: 'And this will be the subheadline for Page1'
+		headlines: '',
+	},
+
+	widgetFooter: {
+		footerText: '',
 	},
 
 	widgetData: {
 		billTitle: '',
 		position: '',
 		customLetter: '',
-		talkingPoints: ''
+		talkingPointHeadline: '',
+		talkingPoints: '',
+		widgetID: pvoxGlobal.widgetID,
+		billID: '',
+		origin: ''
 	},
 
-	addressData: {
-		first_name: '',
-		last_name: '',
+	userData: {
+		firstName: '',
+		lastName: '',
 		email: '',
 		prefix: '',
 		suffix: '',
-        zip_code: '',
+        zipCode: '',
         address: '',
         address_2: '',
         city: '',
         phone: '',
-        message: '',
-        widget_id: '',
-        bill_id: '',
-        user_id: '',
-        congressional_district: '',
+        message: '',     
+        userID: '',
+        congressionalDistrict: '',
         state: '',
-        position: '',
-        origin: ''
+        position: ''
+	},
+
+	techDetails: {
+		referer: pvoxGlobal.referer,
+		'ipAddress': pvoxGlobal.ipAddress,
+		'visitHash': pvoxGlobal.visitHash
 	}
 }

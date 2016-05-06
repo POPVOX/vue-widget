@@ -1,4 +1,4 @@
-<template id="page-2-template">
+<template id="pvox-page-2-template">
   <div>
     <p>Name and address info</p>
   </div>
@@ -6,6 +6,6 @@
 
 <script>
 export default {
-  template: '#page-2-template'
-}
+		data: () => Store
+	}
 </script>

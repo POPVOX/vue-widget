@@ -1,7 +1,7 @@
-<template id="widget-header">
+<template>
 	<div class="pvox-header">
-		<h1>{{ widgetHeader.headline }}</h1>
-		<p>{{ widgetHeader.subHead }}</p>
+		<h1>{{ widgetHeader.headlines.length > 0 ? widgetHeader.headlines[currentIndex].main : '' }}</h1>
+		<p>{{ widgetHeader.headlines.length > 0 ? widgetHeader.headlines[currentIndex].sub : '' }}</p>
 	</div>
 </template>
 
