@@ -29,6 +29,19 @@ export default {
       {
         // save this email + comment and then return a bool for the existance of this email in our db
         this.loading = true
+
+        this.$http.post('/track/widget', {
+          step: 'step_1',
+          actions: ['entered_email', 'wrote_message'],
+          hash: this.techDetails.visitHash,
+          email: this.userData.email,
+          message: this.userData.message
+        }).then(
+          response => console.log(response),
+          response => {
+            this.loading = false
+            alert(response.data.error)
+          })
       }
   	},
 
@@ -36,7 +49,7 @@ export default {
     {
       this.$http.post('/track/widget', {
           widget_id: this.widgetData.widgetID,
-          action: 'viewed_widget',
+          actions: ['viewed_widget'],
           hash: this.techDetails.visitHash,
           ip_address: this.techDetails.ipAddress
         }).then(response => console.log(response))
