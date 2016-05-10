@@ -2,7 +2,7 @@
 	<div>
 		<p class="talking-point-headling">{{ widgetData.talkingPointHeadline }}</p>
     <ul id="example-1">
-      <li v-for="talkingPoint in widgetData.talkingPoints">
+      <li v-for="talkingPoint in widgetData.talkingPoints" track-by="$index">
         {{ talkingPoint }}
       </li>
     </ul>
@@ -21,6 +21,15 @@
 <script>
 import Store from '../store'
 
+let checkNextStep = (data) =>
+{
+  if (data.type === 'commentReady')
+  {
+    Store.currentIndex++
+    Store.loading = false
+  }
+}
+
 export default {
 	data: () => Store,
   	
@@ -30,14 +39,15 @@ export default {
         // save this email + comment and then return a bool for the existance of this email in our db
         this.loading = true
 
-        this.$http.post('/track/widget', {
+        this.$http.post(this.widgetTrackURL, {
           step: 'step_1',
           actions: ['entered_email', 'wrote_message'],
           hash: this.techDetails.visitHash,
+          bill_id: this.widgetData.billID,
           email: this.userData.email,
           message: this.userData.message
         }).then(
-          response => console.log(response),
+          response => checkNextStep(response.data),
           response => {
             this.loading = false
             alert(response.data.error)
@@ -47,7 +57,7 @@ export default {
 
     ready: function()
     {
-      this.$http.post('/track/widget', {
+      this.$http.post(this.widgetTrackURL, {
           widget_id: this.widgetData.widgetID,
           actions: ['viewed_widget'],
           hash: this.techDetails.visitHash,

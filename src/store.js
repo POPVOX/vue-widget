@@ -4,10 +4,11 @@ export default {
 	active: true,
 	sandbox: false,
 	onAllowedUrl: true,
-	userLoggedIn: false,
+	userLoggedIn: pvoxGlobal.loggedInUser,
 	allViews: ['Page1', 'Page2', 'Page3', 'Page4', 'Page5'],
 	currentView: '',
 	currentIndex: 0,
+	widgetTrackURL: '/track/widget',
 
 	widgetHeader: {
 		headlines: '',
