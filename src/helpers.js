@@ -18,6 +18,18 @@ export default {
 		return vars
 	},
 
+	formatPhoneNumber: (number) => {
+		let onlyNumbers = number.replace(/[^\d]+/g, '')
+
+		if (onlyNumbers.length !== 10)
+		{
+			alert('Please enter a valid phone number')
+			return ''
+		}
+
+     	return onlyNumbers.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3')
+	},
+
 	fakeLoad: () => {
 		Store.loading = true
 
@@ -26,12 +38,24 @@ export default {
 		}, 2000)
 	},
 
-	mapWidgetDataToStore: data => {
+	mapWidgetStatusToStore: data => {
 		Store.active = data.active
+		Store.onAllowedUrl = Store.debug ? true : pvoxGlobal.embedUrl === data.allowedUrl
 		Store.sandbox = data.sandbox
+	},
+
+	mapWidgetDataToStore: data => {
 		Store.widgetHeader.headlines = data.widgetHeadlines
 		Store.widgetFooter = data.widgetFooter
 		Store.widgetData = data.widgetData
+		Store.introViewComponent = data.introViewComponent
+		Store.customField = data.customField
+	},
+
+	mapSocialMediaUserDataToStore: () => {
+		Store.userData.firstName = pvoxGlobal.userObject.first_name,
+		Store.userData.lastName = pvoxGlobal.userObject.last_name,
+		Store.userData.photo = pvoxGlobal.userObject.photo
 	},
 
 	mapUserDataToStore: () => {

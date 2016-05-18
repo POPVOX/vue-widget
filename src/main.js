@@ -3,20 +3,29 @@ import Store from './store'
 import App from './App.vue'
 import Helpers from './helpers'
 
-Vue.use(require('vue-resource'));
+Vue.use(require('vue-resource'))
+
+Vue.filter('trim', {
+  write: val => val.trim()
+})
 
 /* eslint-disable no-new */
-var vm = new Vue({
+pvoxGlobal.vm = new Vue({
   el: 'body',
   
   data: Store,
   
   components: { App },
+
+  methods: {
+    updateMessageText: function(text)
+    {
+      this.userData.message = text
+    }
+  },
   
   ready: function()
   {
-  	jQuery('#pvox-loading').modal('show')
-
   	let widget_id = Helpers.getQueryParam('widget_id')
   	
   	if (widget_id !== null)
@@ -24,22 +33,31 @@ var vm = new Vue({
   		this.widgetData.widget_id = widget_id
 
   		this.$http.get('/widgets/write-lawmaker-data/' + widget_id).then(
-			response => {
-				Helpers.mapWidgetDataToStore(response.data)
-				this.userData.message = this.widgetData.customLetter
-				this.currentView = this.allViews[this.currentIndex]
-				
-				setTimeout(() => this.loading = false, 1000)
-			},
-			response => {
-				console.log('Could not load widget data')
-				this.loading = false
-			}
-		)
+  			response => {
+          Helpers.mapWidgetStatusToStore(response.data)
+
+          if (this.active && this.onAllowedUrl)
+          {
+            Helpers.mapWidgetDataToStore(response.data)
+            this.userData.message = this.widgetData.customLetter
+            this.currentView = this.allViews[this.currentIndex]
+          }
+          else
+          {
+            this.currentView = 'Errors'
+          }
+  				
+  				setTimeout(() => this.loading = false, 1000)
+  			},
+  			response => {
+  				console.log('Could not load widget data')
+  				this.loading = false
+  			}
+		  )
   	}
   }
 }) 
 
-vm.$watch('currentIndex', (newVal) => {
+pvoxGlobal.vm.$watch('currentIndex', (newVal) => {
 	Store.currentView = Store.allViews[newVal]
 })
