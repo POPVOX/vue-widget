@@ -5,11 +5,13 @@
   		{{ userData.address }} <br>
   		{{ userData.address_2 }} <br v-if="userData.address_2">
   		{{ userData.city }}, {{ userData.state }} {{ userData.zipCode }}
+      <p><a @click="editAddress()" href="#">Edit Address</a></p>
   	</address>
     <p class="preview-hold"><pre class="pre-scrollable">Dear your legislators,
 
 {{ userData.message }}</pre>
     </p>
+    <p class="text-right edit-link"><a @click="launchMessageEditor(600, 600)" href="#">Edit Message</a></p>
     <button @click="sendMessage()" type="submit" class="btn btn-primary btn-block">Send your message</button>
   </div>
 </template>
@@ -23,6 +25,14 @@ export default {
 	data: () => Store,
 
   methods: {
+    launchMessageEditor: Helpers.showMessagePopup,
+
+    editAddress: function()
+    {
+      Helpers.fakeLoad()
+      this.currentIndex = 2
+    },
+
     sendMessage: function()
     {
       this.loading = true
@@ -38,7 +48,7 @@ export default {
           widget_data: {
             user_id: this.userData.userID,
             bill_id: this.widgetData.billID,
-            position: this.widgetData.position,
+            position: this.widgetData.userPosition,
             message: this.userData.message,
             first_name: this.userData.firstName,
             last_name: this.userData.lastName,

@@ -24,6 +24,7 @@ export default {
 	widgetData: {
 		billTitle: '',
 		position: '',
+		userPosition: '',
 		customLetter: '',
 		talkingPointHeadline: '',
 		talkingPoints: '',

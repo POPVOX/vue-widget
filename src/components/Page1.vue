@@ -23,6 +23,7 @@
 
 <script>
 import Store from '../store'
+import Helpers from '../helpers'
 import CustomField from './CustomField.vue'
 import TalkingPoints from './intro/TalkingPoints.vue'
 import VideoPlayer from './intro/VideoPlayer.vue'
@@ -56,6 +57,13 @@ export default {
   	methods: {
       startCommentForm: function()
       {
+        if (this.widgetData.userPosition === '*')
+        {
+          // they haven't chosen a position yet on a neutral widget - so make them
+          alert('You have to choose a position to continue.')
+          return false
+        }
+
         // save this email + comment and then return a bool for the existance of this email in our db
         this.loading = true
 
@@ -75,19 +83,7 @@ export default {
             alert(response.data.error)
           })
       },
-      launchTextPopup: function(width, height)
-      {
-        let leftPosition, topPosition
-          
-        leftPosition = (window.screen.width / 2) - ((width / 2) + 10)
-        topPosition = (window.screen.height / 2) - ((height / 2) + 50)
-        
-        let windowFeatures = "status=no,height=" + height + ",width=" + width + ",resizable=yes,left=" + leftPosition + ",top=" + topPosition + ",screenX=" + leftPosition + ",screenY=" + topPosition + ",toolbar=no,menubar=no,scrollbars=no,scrolling=no,location=no,directories=no"
-        
-        let win = window.open('/comments/message-popup', 'widgetMessagePopup', windowFeatures)
-
-        pvoxGlobal.popupMessageOpen = true
-      }
+      launchTextPopup: Helpers.showMessagePopup
   	},
 
     ready: function()

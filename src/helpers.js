@@ -38,6 +38,19 @@ export default {
 		}, 2000)
 	},
 
+	showMessagePopup: (width, height) => {
+		let leftPosition, topPosition
+          
+        leftPosition = (window.screen.width / 2) - ((width / 2) + 10)
+        topPosition = (window.screen.height / 2) - ((height / 2) + 50)
+        
+        let windowFeatures = "status=no,height=" + height + ",width=" + width + ",resizable=yes,left=" + leftPosition + ",top=" + topPosition + ",screenX=" + leftPosition + ",screenY=" + topPosition + ",toolbar=no,menubar=no,scrollbars=no,scrolling=no,location=no,directories=no"
+        
+        let win = window.open('/comments/message-popup', 'widgetMessagePopup', windowFeatures)
+
+        pvoxGlobal.popupMessageOpen = true
+	},
+
 	mapWidgetStatusToStore: data => {
 		Store.active = data.active
 		Store.onAllowedUrl = Store.debug ? true : pvoxGlobal.embedUrl === data.allowedUrl

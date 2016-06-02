@@ -59,7 +59,11 @@ import Helpers from '../helpers'
 let checkNextStep = () => {
     Store.currentIndex++
     Helpers.fakeLoad()
-    Helpers.mapUserDataToStore()
+
+    if (!Store.userLoggedIn)
+	{
+		Helpers.mapUserDataToStore()
+	}
 }
 
 export default {

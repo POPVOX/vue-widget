@@ -9,7 +9,7 @@
     /** Are we testing local,remote? **/
     var baseUrl = 'http://popvox.dev';
     // var baseUrl = 'https://www.popvox.com';
-    // var baseUrl = 'https://www.popvox-staging.elasticbeanstalk.com';
+    // var baseUrl = 'http://dev.popvox.com';
 
     /******** Get reference to self (scriptTag) *********/
     var allScripts = document.getElementsByTagName('script');
@@ -77,10 +77,7 @@
                 ifrm.style.border = 0;
                 $thisScript.parent().html(ifrm);
 
-                setTimeout(function()
-                {
-                    iFrameResize({ checkOrigin: false });
-                }, 3000);
+                iFrameResize({ checkOrigin: false });
             });
         });
     }
