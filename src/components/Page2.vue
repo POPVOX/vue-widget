@@ -14,13 +14,10 @@
         </a>
         <hr>
         <p v-if="userData.isNewUser">Sign up with your email address:</p>
-        <p v-else>Sign in with email</p>
+        <p v-else>Sign in with POPVOX password</p>
 		<form @submit.prevent="skipSocialLogin()" action="">
-	      <div class="form-group">
-	        <input v-model="userData.email" type="text" class="form-control" placeholder="enter your email address" required>
-	      </div>
 	      <div v-if="!userData.isNewUser" class="form-group">
-	        <input v-model="userData.password" type="text" class="form-control" placeholder="enter your email password" required>
+	        <input v-model="userData.password" type="password" class="form-control" placeholder="enter your email password" required>
 	      </div>
 	      <button type="submit" class="btn btn-primary btn-block">Submit</button>
 	    </form>
@@ -38,13 +35,14 @@ let checkNextStep = () => {
 }
 
 let updateUserLoginData = () => {
-	if (Store.userData.email !== pvoxGlobal.userObject.email)
-	{
-		alert('The email address you entered must match the email of your social media account.')
-		Store.loading = false
-		return false
-	}
+	// if (Store.userData.email !== pvoxGlobal.userObject.email)
+	// {
+	// 	alert('The email address you entered must match the email of your social media account.')
+	// 	Store.loading = false
+	// 	return false
+	// }
 
+	Store.userData.email = pvoxGlobal.userObject.email
 	Store.userLoggedIn = pvoxGlobal.loggedInUser
 	Store.loading = true
 
@@ -80,8 +78,21 @@ export default {
 			},
 			skipSocialLogin: function()
 			{
-				Helpers.fakeLoad()
-				this.currentIndex++
+				this.loading = true
+
+		        this.$http.post('/widget/login', {
+		          email: this.userData.email,
+		          password: this.userData.password
+		        }).then(
+		          response => {
+		          	pvoxGlobal.loggedInUser = true
+		          	pvoxGlobal.userObject = response.data
+		          	updateUserLoginData()
+		          },
+		          response => {
+		            this.loading = false
+		            alert(response.data.error)
+		          })
 			}
 		}
 	}

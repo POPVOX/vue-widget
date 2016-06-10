@@ -16,7 +16,7 @@
 			</div>
 			<div class="form-group">
 				<label for="phone">Phone</label>
-				<input v-model="userData.phone" @blur="formatPhoneNumber()" type="text" class="form-control" id="phone" required>
+				<input v-model="userData.phone" type="text" class="form-control" id="phone" required>
 			</div>
 			<hr>
 			<button type="submit" class="btn btn-primary btn-block">Next</button>
@@ -29,10 +29,10 @@ import Store from '../store'
 import Helpers from '../helpers'
 
 let checkNextStep = (data) => {
-	if (data.type === 'userCreated')
-	{
+	// if (data.type === 'userCreated')
+	// {
 		
-	}
+	// }
     Store.currentIndex++
     Helpers.fakeLoad()
 }
@@ -44,6 +44,14 @@ export default {
 		sendUserInfo: function()
 		{
 			this.loading = true
+
+			// make sure the phone number is formatted correctly on submit
+			this.userData.phone = Helpers.formatPhoneNumber(this.userData.phone)
+
+			if (this.userData.phone === '')
+			{
+				return false
+			}
 
 	        this.$http.post(this.widgetTrackURL, {
 	          step: 'step_3',
@@ -64,10 +72,6 @@ export default {
 	            this.loading = false
 	            alert(response.data.error)
 	          })
-		},
-		formatPhoneNumber: function()
-		{
-			this.userData.phone = Helpers.formatPhoneNumber(this.userData.phone)
 		}
 	}
 }

@@ -61,3 +61,14 @@ pvoxGlobal.vm = new Vue({
 pvoxGlobal.vm.$watch('currentIndex', (newVal) => {
 	Store.currentView = Store.allViews[newVal]
 })
+
+pvoxGlobal.vm.$watch('userData.state', (newVal) => {
+  if (Store.widgetData.restrictedToState)
+  {
+    if (Store.userData.state !== Store.widgetData.restrictedToState)
+    {
+      alert('Only users that live in ' + Store.widgetData.restrictedToState + ' are allowed to weigh in on this bill.')
+      window.location.reload()
+    }
+  }
+})

@@ -32,7 +32,8 @@ export default {
 		widgetID: pvoxGlobal.widgetID,
 		position: '',
 		billID: '',
-		origin: ''
+		origin: '',
+		restrictedToState: ''
 	},
 
 	customField: {
@@ -55,6 +56,7 @@ export default {
         phone: '',
         message: '',     
         userID: '',
+        password: '',
         congressionalDistrict: '',
         state: '',
         photo: '',

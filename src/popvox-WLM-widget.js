@@ -6,11 +6,6 @@
     var jqueryVersion = "1.8.3";
     var scriptTag; //reference to the html script tag
 
-    /** Are we testing local,remote? **/
-    var baseUrl = 'http://popvox.dev';
-    // var baseUrl = 'https://www.popvox.com';
-    // var baseUrl = 'http://dev.popvox.com';
-
     /******** Get reference to self (scriptTag) *********/
     var allScripts = document.getElementsByTagName('script');
     var targetScripts = [];
@@ -62,6 +57,21 @@
 
             var $thisScript = jQuery(scriptTag);
             var $widgetId = $thisScript.data('widget');
+            var $baseUrl = '';
+
+            /** Are we testing local,remote? **/
+            switch($thisScript.data('env'))
+            {
+                case 'local':
+                    console.log('[PVOX WIDGET] Widget is in local mode');
+                    $baseUrl = 'http://popvox.dev';
+                    break;
+                case 'dev':
+                    console.log('[PVOX WIDGET] Widget is in dev mode');
+                    $baseUrl = 'http://dev.popvox.com';
+                    break;
+                default: $baseUrl = 'https://www.popvox.com';
+            }
           
             var jsonp_url = "https://api.ipify.org?format=jsonp&callback=?";
           
@@ -71,7 +81,7 @@
                 
                 ifrm = document.createElement('iframe');
                 ifrm.setAttribute('scrolling', 'no');
-                ifrm.setAttribute('src', baseUrl + '/widgets/write-lawmaker?widget_id=' + $widgetId + '&referrer=' + $ref + '&ip_address=' + result.ip);
+                ifrm.setAttribute('src', $baseUrl + '/widgets/write-lawmaker?widget_id=' + $widgetId + '&referrer=' + $ref + '&ip_address=' + result.ip);
                 ifrm.style.width = '100%'; 
                 ifrm.style.height = '150px';
                 ifrm.style.border = 0;

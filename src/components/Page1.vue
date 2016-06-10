@@ -95,7 +95,7 @@ export default {
           hash: this.techDetails.visitHash,
           ip_address: this.techDetails.ipAddress,
           referer: this.techDetails.referer
-        }).then(response => console.log(response))
+        })
     }
 }
 </script>
