@@ -2,7 +2,7 @@
 
     var scriptName = "popvox-WLM-widget.js"; //name of this script, used to get reference to own tag
     var jQuery; //noconflict reference to jquery
-    var jqueryPath = "http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"; 
+    var jqueryPath = "https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"; 
     var jqueryVersion = "1.8.3";
     var scriptTag; //reference to the html script tag
 
@@ -64,11 +64,11 @@
             {
                 case 'local':
                     console.log('[PVOX WIDGET] Widget is in local mode');
-                    $baseUrl = 'http://popvox.dev';
+                    $baseUrl = 'https://popvox.dev';
                     break;
                 case 'dev':
                     console.log('[PVOX WIDGET] Widget is in dev mode');
-                    $baseUrl = 'http://dev.popvox.com';
+                    $baseUrl = 'https://dev.popvox.com';
                     break;
                 default: $baseUrl = 'https://www.popvox.com';
             }

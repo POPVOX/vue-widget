@@ -16,7 +16,7 @@
       <div class="form-group">
         <input v-model="userData.email | trim" type="text" class="form-control" placeholder="enter your email address" required>
       </div>
-      <button type="submit" class="btn btn-primary btn-block">Submit</button>
+      <button type="submit" class="btn btn-primary btn-block btn-max-width">Next</button>
     </form>
   </div>
 </template>

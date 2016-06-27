@@ -1,26 +1,28 @@
 <template>
-	<hr>
-	<div class="widget-social-login">
-  		<p v-if="userData.isNewUser">Sign up with your social media account:</p>
-  		<p v-else>Sign in with your social media account:</p>
-		<a @click.prevent="socialLogin(520, 420)" class="btn btn-block btn-social btn-facebook" href="/authorize/social-login/facebook/popup">
-        	<span class="fa fa-facebook"></span> Sign in with Facebook
-        </a>
-        <a @click.prevent="socialLogin(520, 420)" class="btn btn-block btn-social btn-linkedin" href="/authorize/social-login/linkedin/popup">
-        	<span class="fa fa-linkedin"></span> Sign in with LinkedIn
-        </a>
-        <a @click.prevent="socialLogin(520, 420)" class="btn btn-block btn-social btn-google" href="/authorize/social-login/google/popup">
-        	<span class="fa fa-google"></span> Sign in with Google+
-        </a>
-        <hr>
-        <p v-if="userData.isNewUser">Sign up with your email address:</p>
-        <p v-else>Sign in with POPVOX password</p>
-		<form @submit.prevent="skipSocialLogin()" action="">
-	      <div v-if="!userData.isNewUser" class="form-group">
-	        <input v-model="userData.password" type="password" class="form-control" placeholder="enter your email password" required>
-	      </div>
-	      <button type="submit" class="btn btn-primary btn-block">Submit</button>
-	    </form>
+	<div id="main-widget-content">
+		<hr>
+		<div class="widget-social-login">
+	  		<p v-if="userData.isNewUser" class="text-center">Sign up with your social media account:</p>
+	  		<p v-else class="text-center">Sign in with your social media account:</p>
+			<a @click.prevent="socialLogin(520, 420)" class="btn btn-block btn-social btn-facebook" href="/authorize/social-login/facebook/popup">
+	        	<span class="fa fa-facebook"></span> Sign in with Facebook
+	        </a>
+	        <a @click.prevent="socialLogin(520, 420)" class="btn btn-block btn-social btn-linkedin" href="/authorize/social-login/linkedin/popup">
+	        	<span class="fa fa-linkedin"></span> Sign in with LinkedIn
+	        </a>
+	        <a @click.prevent="socialLogin(520, 420)" class="btn btn-block btn-social btn-google" href="/authorize/social-login/google/popup">
+	        	<span class="fa fa-google"></span> Sign in with Google+
+	        </a>
+	        <p class="or text-center">or</p>
+	        <p v-if="userData.isNewUser" class="text-center">Sign up with your email address:</p>
+	        <p v-else class="text-center">Sign in with POPVOX password:</p>
+			<form @submit.prevent="skipSocialLogin()" action="">
+		      <div v-if="!userData.isNewUser" class="form-group">
+		        <input v-model="userData.password" type="password" class="form-control" placeholder="enter your email password" required>
+		      </div>
+		      <button type="submit" class="btn btn-primary btn-block">{{ userData.isNewUser ? 'Sign Up' : 'Submit' }}</button>
+		    </form>
+		</div>
 	</div>
 </template>
 

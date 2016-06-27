@@ -1,11 +1,12 @@
 export default {
 
-	debug: true,
+	debug: false,
 
 	loading: true,
 	active: true,
 	sandbox: false,
 	onAllowedUrl: true,
+	embeddedUrl: '',
 	userLoggedIn: pvoxGlobal.loggedInUser,
 	introViewComponent: '',
 	allViews: ['Page1', 'Page2', 'Page3', 'Page4', 'Page5', 'WrapUp'],

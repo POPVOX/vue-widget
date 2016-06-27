@@ -19,7 +19,7 @@
 				<input v-model="userData.phone" type="text" class="form-control" id="phone" required>
 			</div>
 			<hr>
-			<button type="submit" class="btn btn-primary btn-block">Next</button>
+			<button type="submit" class="btn btn-primary btn-block btn-max-width">Next</button>
 </form>
 	</div>
 </template>

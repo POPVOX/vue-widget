@@ -53,6 +53,7 @@ export default {
 
 	mapWidgetStatusToStore: data => {
 		Store.active = data.active
+		Store.embeddedUrl = data.embeddedUrl
 		Store.onAllowedUrl = Store.debug ? true : pvoxGlobal.embedUrl === data.allowedUrl
 		Store.sandbox = data.sandbox
 	},

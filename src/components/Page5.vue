@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="main-widget-content">
   	<address>
   		{{ userData.prefix }} {{ userData.firstName }} {{ userData.lastName }} {{ userData.suffix }} <br>
   		{{ userData.address }} <br>
@@ -12,7 +12,7 @@
 {{ userData.message }}</pre>
     </p>
     <p class="text-right edit-link"><a @click="launchMessageEditor(600, 600)" href="#">Edit Message</a></p>
-    <button @click="sendMessage()" type="submit" class="btn btn-primary btn-block">Send your message</button>
+    <button @click="sendMessage()" type="submit" class="btn btn-primary btn-block btn-max-width">Send Your Message</button>
   </div>
 </template>
 
