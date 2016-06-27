@@ -37,13 +37,6 @@ let checkNextStep = () => {
 }
 
 let updateUserLoginData = () => {
-	// if (Store.userData.email !== pvoxGlobal.userObject.email)
-	// {
-	// 	alert('The email address you entered must match the email of your social media account.')
-	// 	Store.loading = false
-	// 	return false
-	// }
-
 	Store.userData.email = pvoxGlobal.userObject.email
 	Store.userLoggedIn = pvoxGlobal.loggedInUser
 	Store.loading = true
@@ -81,6 +74,12 @@ export default {
 			skipSocialLogin: function()
 			{
 				this.loading = true
+
+				if (this.userData.isNewUser)
+				{
+					checkNextStep()
+					return false
+				}
 
 		        this.$http.post('/widget/login', {
 		          email: this.userData.email,
