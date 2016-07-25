@@ -2,8 +2,8 @@
 	<div id="main-widget-content">
 		<hr>
 		<div class="widget-social-login">
-	  		<p v-if="userData.isNewUser" class="text-center">Sign up with your social media account:</p>
-	  		<p v-else class="text-center">Sign in with your social media account:</p>
+	  		<p v-if="userData.isNewUser" class="text-center">Sign up with social media:</p>
+	  		<p v-else class="text-center">Sign in with social media:</p>
 			<a @click.prevent="socialLogin(520, 420)" class="btn btn-block btn-social btn-facebook" href="/authorize/social-login/facebook/popup">
 	        	<span class="fa fa-facebook"></span> Sign in with Facebook
 	        </a>
@@ -18,10 +18,11 @@
 	        <p v-else class="text-center">Sign in with POPVOX password:</p>
 			<form @submit.prevent="skipSocialLogin()" action="">
 		      <div v-if="!userData.isNewUser" class="form-group">
-		        <input v-model="userData.password" type="password" class="form-control" placeholder="enter your email password" required>
+		        <input v-model="userData.password" type="password" class="form-control" placeholder="enter password" required>
 		      </div>
 		      <button type="submit" class="btn btn-primary btn-block">{{ userData.isNewUser ? 'Sign Up' : 'Submit' }}</button>
 		    </form>
+		    <p class="or text-center"><small><a href="https://www.popvox.com/forgot-password">Don't have a password?</a></small></p>
 		</div>
 	</div>
 </template>

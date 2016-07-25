@@ -3,8 +3,10 @@
     <div id="intro-component">
   		<component :is="introViewComponent"></component>
     </div>
+    <hr>
     <form @submit.prevent="startCommentForm()">
       <div class="form-group">
+        <p><small><strong>Personalize your message to your lawmakers!</strong>  When lawmakers are undecided on a bill, they are most influenced by personal messages from constituents.</small></p>
         <textarea v-model="userData.message" id="pvox-comment" class="form-control" rows="8"></textarea>
         <button @click="launchTextPopup(600, 600)" type="button" class="btn btn-default pull-right text-pop">
           <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>

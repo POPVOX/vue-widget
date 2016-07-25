@@ -7,7 +7,7 @@
   		{{ userData.city }}, {{ userData.state }} {{ userData.zipCode }}
       <p><a @click="editAddress()" href="#">Edit Address</a></p>
   	</address>
-    <p class="preview-hold"><pre class="pre-scrollable">Dear your legislators,
+    <p class="preview-hold"><pre class="pre-scrollable">Dear lawmaker,
 
 {{ userData.message }}</pre>
     </p>
