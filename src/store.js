@@ -1,6 +1,6 @@
 export default {
 
-	debug: false,
+	debug: true,
 
 	loading: true,
 	active: true,

@@ -84,7 +84,7 @@ export default {
         Store.userData.state = pvoxGlobal.userObject.state,
         Store.userData.phone = pvoxGlobal.userObject.phone,
         Store.userData.userID = pvoxGlobal.userObject.id,
-        Store.userData.congressionalDistrict = pvoxGlobal.userObject.current_district
-        Store.widgetHeader.headlines[Store.widgetHeader.headlines.length - 1] = 'Thanks for weighing in!'
+        Store.userData.congressionalDistrict = pvoxGlobal.userObject.current_district,
+        Store.widgetHeader.headlines[Store.widgetHeader.headlines.length - 1].main = 'Thanks for weighing in!'
 	}
 }
