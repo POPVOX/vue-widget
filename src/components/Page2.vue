@@ -4,13 +4,13 @@
 		<div class="widget-social-login">
 	  		<p v-if="userData.isNewUser" class="text-center">Sign up with social media:</p>
 	  		<p v-else class="text-center">Sign in with social media:</p>
-			<a @click.prevent="socialLogin(520, 420)" class="btn btn-block btn-social btn-facebook" href="/authorize/social-login/facebook/popup">
+			<a @click.prevent="socialLogin(520, 420, $event)" class="btn btn-block btn-social btn-facebook" href="/authorize/social-login/facebook/popup">
 	        	<span class="fa fa-facebook"></span> Sign in with Facebook
 	        </a>
-	        <a @click.prevent="socialLogin(520, 420)" class="btn btn-block btn-social btn-linkedin" href="/authorize/social-login/linkedin/popup">
+	        <a @click.prevent="socialLogin(520, 420, $event)" class="btn btn-block btn-social btn-linkedin" href="/authorize/social-login/linkedin/popup">
 	        	<span class="fa fa-linkedin"></span> Sign in with LinkedIn
 	        </a>
-	        <a @click.prevent="socialLogin(520, 420)" class="btn btn-block btn-social btn-google" href="/authorize/social-login/google/popup">
+	        <a @click.prevent="socialLogin(520, 420, $event)" class="btn btn-block btn-social btn-google" href="/authorize/social-login/google/popup">
 	        	<span class="fa fa-google"></span> Sign in with Google+
 	        </a>
 	        <p class="or text-center">or</p>
@@ -51,7 +51,7 @@ export default {
 		data: () => Store,
 
 		methods: {
-			socialLogin: function(width, height)
+			socialLogin: function(width, height, event)
 			{
 				let leftPosition, topPosition
 			    

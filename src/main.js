@@ -9,6 +9,8 @@ Vue.filter('trim', {
   write: val => val.trim()
 })
 
+Vue.http.headers.common['X-CSRF-TOKEN'] = pvoxGlobal.csrfToken
+
 /* eslint-disable no-new */
 pvoxGlobal.vm = new Vue({
   el: 'body',
@@ -56,7 +58,7 @@ pvoxGlobal.vm = new Vue({
 		  )
   	}
   }
-}) 
+})
 
 pvoxGlobal.vm.$watch('currentIndex', (newVal) => {
 	Store.currentView = Store.allViews[newVal]

@@ -34,7 +34,8 @@ export default {
 		position: '',
 		billID: '',
 		origin: '',
-		restrictedToState: ''
+		restrictedToState: '',
+		customFinish: ''
 	},
 
 	customField: {
