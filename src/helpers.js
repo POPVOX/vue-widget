@@ -64,6 +64,8 @@ export default {
 		Store.widgetData = data.widgetData
 		Store.introViewComponent = data.introViewComponent
 		Store.customField = data.customField
+		Store.showShareButtons = data.showShareButtons
+		Store.socialShareData = data.socialShareData
 	},
 
 	mapSocialMediaUserDataToStore: () => {

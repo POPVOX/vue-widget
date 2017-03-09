@@ -7,12 +7,21 @@ export default {
 	sandbox: false,
 	onAllowedUrl: true,
 	embeddedUrl: '',
+	messageSent: false,
 	userLoggedIn: pvoxGlobal.loggedInUser,
 	introViewComponent: '',
 	allViews: ['Page1', 'Page2', 'Page3', 'Page4', 'Page5', 'WrapUp'],
 	currentView: '',
 	currentIndex: 0,
 	widgetTrackURL: '/track/widget',
+	showShareButtons: false,
+
+	socialShareData: {
+		share_description: '',
+		share_image: '',
+		share_url: '',
+		share_text: ''
+	},
 
 	widgetHeader: {
 		headlines: '',

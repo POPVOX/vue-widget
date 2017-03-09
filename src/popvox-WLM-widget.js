@@ -88,6 +88,18 @@
                 $thisScript.parent().html(ifrm);
 
                 iFrameResize({ checkOrigin: false });
+            }).fail(function()
+            {
+                var $ref = document.referrer;
+                ifrm = document.createElement('iframe');
+                ifrm.setAttribute('scrolling', 'no');
+                ifrm.setAttribute('src', $baseUrl + '/widgets/write-lawmaker-fail?widget_id=' + $widgetId + '&referer=' + $ref);
+                ifrm.style.width = '100%'; 
+                ifrm.style.height = $thisScript.data('set-height') === 'undefined' ? '150px' : $thisScript.data('set-height') + 'px';
+                ifrm.style.border = 0;
+                $thisScript.parent().html(ifrm);
+
+                iFrameResize({ checkOrigin: false });
             });
         });
     }
