@@ -72,11 +72,13 @@
                     break;
                 default: $baseUrl = 'https://www.popvox.com';
             }
+
+            var IPsuccess = false;
           
             var jsonp_url = "https://api.ipify.org?format=jsonp&callback=?";
           
             jQuery.getJSON(jsonp_url, function(result) {
-          	
+          	    IPsuccess = true;
                 var $ref = document.referrer;
                 
                 ifrm = document.createElement('iframe');
@@ -88,19 +90,29 @@
                 $thisScript.parent().html(ifrm);
 
                 iFrameResize({ checkOrigin: false });
-            }).fail(function()
-            {
-                var $ref = document.referrer;
-                ifrm = document.createElement('iframe');
-                ifrm.setAttribute('scrolling', 'no');
-                ifrm.setAttribute('src', $baseUrl + '/widgets/write-lawmaker-fail?widget_id=' + $widgetId + '&referer=' + $ref);
-                ifrm.style.width = '100%'; 
-                ifrm.style.height = $thisScript.data('set-height') === 'undefined' ? '150px' : $thisScript.data('set-height') + 'px';
-                ifrm.style.border = 0;
-                $thisScript.parent().html(ifrm);
-
-                iFrameResize({ checkOrigin: false });
             });
+
+            // Check to see if we got a result - if more than 5 seconds - we probably didn't
+            // We will just omit the ip address and let Laravel assign a random hash
+            setTimeout(function()
+            {
+                console.log('No valid ip address');
+
+                if (!IPsuccess)
+                {
+                    var $ref = document.referrer;
+                
+                    ifrm = document.createElement('iframe');
+                    ifrm.setAttribute('scrolling', 'no');
+                    ifrm.setAttribute('src', $baseUrl + '/widgets/write-lawmaker?widget_id=' + $widgetId + '&referer=' + $ref);
+                    ifrm.style.width = '100%'; 
+                    ifrm.style.height = $thisScript.data('set-height') === 'undefined' ? '150px' : $thisScript.data('set-height') + 'px';
+                    ifrm.style.border = 0;
+                    $thisScript.parent().html(ifrm);
+
+                    iFrameResize({ checkOrigin: false });
+                }
+            }, 5000);
         });
     }
 })();
