@@ -96,10 +96,9 @@
             // We will just omit the ip address and let Laravel assign a random hash
             setTimeout(function()
             {
-                console.log('No valid ip address');
-
                 if (!IPsuccess)
                 {
+                    console.log('No valid ip address');
                     var $ref = document.referrer;
                 
                     ifrm = document.createElement('iframe');
