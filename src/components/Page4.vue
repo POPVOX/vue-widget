@@ -50,6 +50,7 @@ export default {
 
 			if (this.userData.phone === '')
 			{
+				this.loading = false
 				return false
 			}
 
@@ -69,8 +70,8 @@ export default {
 	        }).then(
 	          response => checkNextStep(response.data),
 	          response => {
+	          	console.log(this.loading)
 	            this.loading = false
-	            alert(response.data.error)
 	          })
 		}
 	}
