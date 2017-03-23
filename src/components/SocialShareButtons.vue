@@ -1,7 +1,7 @@
 <template>
     <div class="social-buttons">
-        <p class="text-center width-40 m-t-s"><button class="btn btn-social btn-facebook btn-block m-t-sm" @click="shareFacebook()"><i class="fa fa-facebook"></i> Share with Facebook</button></p>
-            <p class="text-center width-40"><button class="btn btn-social btn-twitter btn-block m-t-sm" @click="shareTwitter()"><i class="fa fa-twitter"></i> Share with Twitter</button></p>
+        <p class="text-center m-t-s"><button class="btn btn-social btn-facebook btn-block m-t-sm" @click="shareFacebook()"><i class="fa fa-facebook"></i> Share with Facebook</button></p>
+            <p class="text-center"><button class="btn btn-social btn-twitter btn-block m-t-sm" @click="shareTwitter()"><i class="fa fa-twitter"></i> Share with Twitter</button></p>
     </div>
 </template>
 <style scoped>

@@ -1,28 +1,43 @@
 <template>
 	<div id="main-widget-content">
-    <div id="intro-component">
-  		<component :is="introViewComponent"></component>
-    </div>
-    <hr>
-    <form @submit.prevent="startCommentForm()">
-      <div class="form-group">
-        <p><small><strong>Personalize your message to your lawmakers!</strong>  When lawmakers are undecided on a bill, they are most influenced by personal messages from constituents.</small></p>
-        <textarea v-model="userData.message" id="pvox-comment" class="form-control" rows="8"></textarea>
-        <button @click="launchTextPopup(600, 600)" type="button" class="btn btn-default pull-right text-pop">
-          <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-        </button>
+      <div class="row">
+        <div class="col-sm-12" id="intro-component">
+          <component :is="introViewComponent"></component>
+        </div>
       </div>
-      <div v-if="customField" class="form-group">
-        <custom-field></custom-field>
+      <hr>
+      <div class="row">
+        <div class="col-sm-12">
+          <form @submit.prevent="validateForm()">
+            <div class="form-group">
+              <p><small><strong>Personalize it:</strong>  A personalized constituent message is one of the most effective ways to influence lawmakers.</small></p>
+              <textarea name="message" v-model="userData.message" id="pvox-comment" class="form-control" rows="8" v-validate="'required'" :class="{'input': true, 'error': errors.has('message') }"></textarea>
+              <label v-show="errors.has('message')" class="error">{{ errors.first('message') }}</label>
+              <div class="text-right m-t-sm">
+                <button @click="launchTextPopup(600, 600)" type="button" class="btn btn-default text-pop">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </button>
+              </div>
+            </div>
+            <hr>
+            <div v-if="customField" class="form-group">
+              <custom-field></custom-field>
+            </div>
+            <div class="form-group">
+              <input name="email" v-model="userData.email" type="text" class="form-control" placeholder="enter your email address" v-validate="'required|email'" data-vv-delay="1000" :class="{'input': true, 'error': errors.has('email') }">
+              <label v-show="errors.has('email')" class="error">{{ errors.first('email') }}</label>
+            </div>
+            <button type="submit" class="btn btn-warning2 btn-block btn-max-width" v-bind:class="{'m-progress' : loading}">Next</button>
+          </form>
+        </div>
       </div>
-      <div class="form-group">
-        <input v-model="userData.email | trim" type="text" class="form-control" placeholder="enter your email address" required>
-      </div>
-      <button type="submit" class="btn btn-primary btn-block btn-max-width">Next</button>
-    </form>
   </div>
 </template>
-
+<style scoped>
+  hr {
+        margin-top: 10px;
+    }
+</style>
 <script>
 import Store from '../store'
 import Helpers from '../helpers'
@@ -75,7 +90,7 @@ export default {
           actions: ['entered_email', 'wrote_message'],
           hash: this.techDetails.visitHash,
           bill_id: this.widgetData.billID,
-          email: this.userData.email,
+          email: this.userData.email.trim(),
           message: this.userData.message,
           widget_id: this.widgetData.widgetID
         }).then(
@@ -85,10 +100,19 @@ export default {
             alert(response.data.error)
           })
       },
-      launchTextPopup: Helpers.showMessagePopup
+      launchTextPopup: Helpers.showMessagePopup,
+      validateForm: function()
+      {
+          this.$validator.validateAll().then(() =>
+          {
+              this.startCommentForm()
+          }).catch(() => {
+              alert('Please fill out all the required fields')
+          })
+      }
   	},
 
-    ready: function()
+    mounted: function()
     {
       this.$http.post(this.widgetTrackURL, {
           sandbox: this.sandbox,

@@ -1,28 +1,33 @@
 <template>
 	<div id="main-widget-content">
 		<hr>
-		<div class="widget-social-login">
-	  		<p v-if="userData.isNewUser" class="text-center">Sign up with social media:</p>
-	  		<p v-else class="text-center">Sign in with social media:</p>
-			<a @click.prevent="socialLogin(520, 420, $event)" class="btn btn-block btn-social btn-facebook" href="/authorize/social-login/facebook/popup">
-	        	<span class="fa fa-facebook"></span> Sign in with Facebook
-	        </a>
-	        <a @click.prevent="socialLogin(520, 420, $event)" class="btn btn-block btn-social btn-linkedin" href="/authorize/social-login/linkedin/popup">
-	        	<span class="fa fa-linkedin"></span> Sign in with LinkedIn
-	        </a>
-	        <a @click.prevent="socialLogin(520, 420, $event)" class="btn btn-block btn-social btn-google" href="/authorize/social-login/google/popup">
-	        	<span class="fa fa-google"></span> Sign in with Google+
-	        </a>
-	        <p class="or text-center">or</p>
-	        <p v-if="userData.isNewUser" class="text-center">Sign up with your email address:</p>
-	        <p v-else class="text-center">Sign in with POPVOX password:</p>
-			<form @submit.prevent="skipSocialLogin()" action="">
-		      <div v-if="!userData.isNewUser" class="form-group">
-		        <input v-model="userData.password" type="password" class="form-control" placeholder="enter password" required>
-		      </div>
-		      <button type="submit" class="btn btn-primary btn-block">{{ userData.isNewUser ? 'Sign Up' : 'Submit' }}</button>
-		    </form>
-		    <p class="or text-center"><small><a href="https://www.popvox.com/forgot-password">Don't have a password?</a></small></p>
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="widget-social-login">
+					<p v-if="userData.isNewUser" class="text-center">Sign up with social media:</p>
+					<p v-else class="text-center">Sign in with social media:</p>
+					<a @click.prevent="socialLogin(520, 420, $event)" class="btn btn-block btn-social btn-facebook" href="/authorize/social-login/facebook/popup">
+						<span class="fa fa-facebook"></span> Sign in with Facebook
+					</a>
+					<a @click.prevent="socialLogin(520, 420, $event)" class="btn btn-block btn-social btn-linkedin" href="/authorize/social-login/linkedin/popup">
+						<span class="fa fa-linkedin"></span> Sign in with LinkedIn
+					</a>
+					<a @click.prevent="socialLogin(520, 420, $event)" class="btn btn-block btn-social btn-google" href="/authorize/social-login/google/popup">
+						<span class="fa fa-google"></span> Sign in with Google+
+					</a>
+					<p class="text-center m-t-md">or</p>
+					<p v-if="userData.isNewUser" class="text-center">Sign up with your email address:</p>
+					<p v-else class="text-center m-t-md">Sign in with POPVOX password:</p>
+					<form @submit.prevent="validateForm()" action="">
+						<div v-if="!userData.isNewUser" class="form-group">
+							<input name="password" v-model="userData.password" type="password" class="form-control" placeholder="enter password" v-validate="'required'" :class="{'input': true, 'error': errors.has('password') }">
+							<label v-show="errors.has('password')" class="error">{{ errors.first('password') }}</label>
+						</div>
+						<button type="submit" class="btn btn-warning2 btn-block" v-bind:class="{'m-progress' : loading}">{{ userData.isNewUser ? 'Sign Up' : 'Submit' }}</button>
+						<p v-if="!userData.isNewUser" class="text-center m-t-md"><small><a href="https://www.popvox.com/forgot-password">Forgot password?</a></small></p>
+					</form>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -79,6 +84,7 @@ export default {
 				if (this.userData.isNewUser)
 				{
 					checkNextStep()
+					this.loading = false
 					return false
 				}
 
@@ -95,7 +101,16 @@ export default {
 		            this.loading = false
 		            alert(response.data.error)
 		          })
-			}
+			},
+            validateForm: function()
+            {
+                this.$validator.validateAll().then(() =>
+                {
+                    this.skipSocialLogin()
+                }).catch(() => {
+                    alert('Please fill out all the required fields')
+                })
+            }
 		}
 	}
 </script>
