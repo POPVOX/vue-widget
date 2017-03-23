@@ -5,14 +5,14 @@
   		{{ userData.address }} <br>
   		{{ userData.address_2 }} <br v-if="userData.address_2">
   		{{ userData.city }}, {{ userData.state }} {{ userData.zipCode }}
-      <p><a @click="editAddress()" href="#">Edit Address</a></p>
+      <p><a @click="editAddress()" href="#"><small>Edit Address</small></a></p>
   	</address>
     <p class="preview-hold"><pre class="pre-scrollable">Dear lawmaker,
 
 {{ userData.message }}</pre>
     </p>
-    <p class="text-right edit-link"><a @click="launchMessageEditor(600, 600)" href="#">Edit Message</a></p>
-    <button @click="sendMessage()" type="submit" class="btn btn-primary btn-block btn-max-width">Send Your Message</button>
+    <p class="text-right edit-link"><a @click="launchMessageEditor(600, 600)" href="#"><small>Edit Message</small></a></p>
+    <button @click="sendMessage()" type="submit" class="btn btn-warning2 btn-block btn-max-width m-t-md" v-bind:class="{'m-progress' : loading}">Send Your Message</button>
   </div>
 </template>
 
@@ -29,7 +29,6 @@ export default {
 
     editAddress: function()
     {
-      Helpers.fakeLoad()
       this.currentIndex = 2
     },
 

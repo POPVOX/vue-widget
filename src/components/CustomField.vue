@@ -1,10 +1,10 @@
 <template>
-	<template v-if="customField.type === 'select'">
+	<div v-if="customField.type === 'select'">
 		<label>{{ customField.text }}</label>
 		<select v-model="customField.selectedValue" class="form-control">
-		  <option v-for="value in customField.values" value="{{ value.id }}">{{ value.text }}</option>
+		  <option v-for="value in customField.values" :value="value.id">{{ value.text }}</option>
 		</select>
-	</template>
+	</div>
 </template>
 
 <script>

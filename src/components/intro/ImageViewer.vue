@@ -1,7 +1,9 @@
 <template>
-	<p class="talking-point-heading">{{ widgetData.talkingPointHeadline }}</p>
-	<div class="image-hold">
-		<img :src="widgetData.imageUrl" alt="">
+	<div>
+		<p class="talking-point-heading">{{ widgetData.talkingPointHeadline }}</p>
+		<div class="image-hold">
+			<img :src="widgetData.imageUrl" alt="">
+		</div>
 	</div>
 </template>
 

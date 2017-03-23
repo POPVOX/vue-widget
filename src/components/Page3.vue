@@ -2,27 +2,27 @@
 	<div id="main-widget-content">
 		<hr>
 		<div class="user-info">
-			<form @submit.prevent="sendUserInfo()">
+			<form @submit.prevent="validateForm()">
 				<div class="form-group">
 					<label for="first_name">First Name</label>
-					<input v-model="userData.firstName" type="text" class="form-control" id="first_name">
+					<input v-model="userData.firstName" type="text" class="form-control" name="first_name" id="first_name" v-validate="'required'" data-vv-as="first name" :class="{'input': true, 'error': errors.has('first_name') }">
+					<label v-show="errors.has('first_name')" class="error">{{ errors.first('first_name') }}</label>
 				</div>
 				<div class="form-group">
 					<label for="last_name">Last Name</label>
-					<input v-model="userData.lastName" type="text" class="form-control" id="last_name">
+					<input v-model="userData.lastName" type="text" class="form-control" name="last_name" id="last_name" v-validate="'required'" data-vv-as="last name" :class="{'input': true, 'error': errors.has('last_name') }">
+					<label v-show="errors.has('last_name')" class="error">{{ errors.first('last_name') }}</label>
 				</div>
 				<div class="form-group">
 					<label for="prefix">Prefix</label>
-					<select v-model="userData.prefix" class="form-control" id="prefix">
+					<select v-model="userData.prefix" class="form-control" name="prefix" id="prefix" v-validate="'required'" :class="{'input': true, 'error': errors.has('prefix') }">
 					  <option value="">...</option>
 					  <option value="Mr.">Mr</option>
 					  <option value="Ms.">Ms</option>
 					  <option value="Mrs.">Mrs</option>
-					  <option value="Miss">Miss</option>
 					  <option value="Dr.">Dr.</option>
-					  <option value="Rev.">Rev.</option>
-					  <option value="Sister">Sister</option>
 					</select>
+					<label v-show="errors.has('prefix')" class="error">{{ errors.first('prefix') }}</label>
 				</div>
 				<div class="form-group">
 					<label for="suffix">Suffix</label>
@@ -45,10 +45,17 @@
 				</div>
 				<div class="form-group">
 					<label for="zip_code">Zip Code</label>
-					<input v-model="userData.zipCode" type="text" class="form-control" id="zip_code">
+					<input v-model="userData.zipCode" type="text" class="form-control" name="zip_code" id="zip_code" v-validate="'required|digits:5'" data-vv-as="zip code" :class="{'input': true, 'error': errors.has('zip_code') }">
+					<label v-show="errors.has('zip_code')" class="error">{{ errors.first('zip_code') }}</label>
 				</div>
 				<hr>
-				<button type="submit" class="btn btn-primary btn-block btn-max-width">Next</button>
+				<div v-if="!userLoggedIn" class="form-group">
+					<label for="zip_code">Create a password</label>
+					<input v-model="userData.password" type="password" class="form-control" name="password" id="password" v-validate="'required|min:8'" data-vv-delay="1000" :class="{'input': true, 'error': errors.has('password') }">
+					<label v-show="errors.has('password')" class="error">{{ errors.first('password') }}</label>
+				</div>
+				<hr>
+				<button type="submit" class="btn btn-warning2 btn-block btn-max-width" v-bind:class="{'m-progress' : loading}">Next</button>
 			</form>
 		</div>
 	</div>
@@ -60,12 +67,13 @@ import Helpers from '../helpers'
 
 let checkNextStep = () => {
     Store.currentIndex++
-    Helpers.fakeLoad()
 
     if (!Store.userLoggedIn)
 	{
 		Helpers.mapUserDataToStore()
 	}
+
+    Store.userLoggedIn = true
 }
 
 export default {
@@ -87,6 +95,7 @@ export default {
 	          prefix: this.userData.prefix,
 	          suffix: this.userData.suffix,
 	          zip_code: this.userData.zipCode,
+			  password: this.userData.password,
 	          driver: pvoxGlobal.driver,
 	          photo: this.userData.photo,
 	          widget_id: this.widgetData.widgetID,
@@ -95,12 +104,22 @@ export default {
 	          response => {
 	          	pvoxGlobal.userObject = response.data.userData
 	          	checkNextStep()
+				this.loading = false
 	          },
 	          response => {
 	            this.loading = false
 	            alert(response.data.error)
 	          })
-		}
+		},
+        validateForm: function()
+        {
+			this.$validator.validateAll().then(() =>
+			{
+				this.sendUserInfo()
+			}).catch(() => {
+				alert('Please fill out all the required fields')
+			})
+        }
 	}
 }
 </script>

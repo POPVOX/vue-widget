@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div class="container" id="app">
   	<loading-box></loading-box>
   	<widget-header></widget-header>
     <component :is="currentView"></component>

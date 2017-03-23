@@ -64,7 +64,7 @@
             {
                 case 'local':
                     console.log('[PVOX WIDGET] Widget is in local mode');
-                    $baseUrl = 'http://popvox.dev';
+                    $baseUrl = 'http://popvox-3.dev';
                     break;
                 case 'dev':
                     console.log('[PVOX WIDGET] Widget is in dev mode');
