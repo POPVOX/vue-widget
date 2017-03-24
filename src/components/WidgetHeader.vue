@@ -3,7 +3,7 @@
         <div v-if="sandbox" class="alert alert-info"><i class="fa fa-user-secret"></i> <strong>Sandbox Mode</strong><br>No data currently being tracked</div>
         <div class="row">
             <div class="col-sm-12 pvox-header">
-                <h3>{{ widgetHeader.headlines.length > 0 ? widgetHeader.headlines[currentIndex].main : '' }}</h3>
+                <h3 v-bind:class="[currentIndex === 5 ? 'text-center' : '']">{{ widgetHeader.headlines.length > 0 ? widgetHeader.headlines[currentIndex].main : '' }}</h3>
                 <p>{{ widgetHeader.headlines.length > 0 ? widgetHeader.headlines[currentIndex].sub : '' }}</p>
             </div>
         </div>

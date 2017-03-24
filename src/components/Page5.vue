@@ -15,7 +15,19 @@
     <button @click="sendMessage()" type="submit" class="btn btn-warning2 btn-block btn-max-width m-t-md" v-bind:class="{'m-progress' : loading}">Send Your Message</button>
   </div>
 </template>
-
+<style scoped>
+    .pre-scrollable {
+        max-height: 500px;
+        min-height: 200px;
+    }
+    pre {
+        font-size: .9em;
+        margin-bottom: 10px;
+        white-space: pre-wrap;
+        word-break: normal;
+        font-family: inherit;
+    }
+</style>
 <script>
 
 import Store from '../store'

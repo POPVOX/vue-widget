@@ -35,7 +35,7 @@
             '&name=' + encodeURIComponent(fbData.name) + 
             '&caption=' + encodeURIComponent(fbData.caption) + 
             '&description=' + encodeURIComponent(fbData.description) + 
-            '&redirect_uri=http://popvox3.dev/widgets/share/facebook-popup' + 
+            '&redirect_uri=http://www.popvox.com/widgets/share/facebook-popup' + 
             '&display=popup' 
         let width  = 575,
             height = 400,
