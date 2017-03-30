@@ -33,6 +33,11 @@ pvoxGlobal.vm = new Vue({
         {
             this.widgetData.widget_id = widget_id
 
+            if (widget_id === 'free')
+            {
+                widget_id = widget_id + '?route=' + Helpers.getQueryParam('route')
+            }
+
             this.$http.get('/widgets/write-lawmaker-data/' + widget_id).then(
                 response => {
               Helpers.mapWidgetStatusToStore(response.data)
@@ -47,8 +52,7 @@ pvoxGlobal.vm = new Vue({
               {
                 this.currentView = 'Errors'
               }
-
-                    setTimeout(() => this.loading = false, 1000)
+                setTimeout(() => this.loading = false, 1000)
                 },
                 response => {
                     console.log('Could not load widget data')

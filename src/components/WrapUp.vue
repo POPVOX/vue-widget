@@ -20,9 +20,10 @@
 		<div v-if="widgetData.customFinish" v-html="widgetData.customFinish">
 		</div>
 		<div v-else>
-			<h4>Share this campaign!</h4>
+			<h4 v-if="widgetData.widgetID === 'free'">Share this!</h4>
+			<h4 v-else>Share this campaign!</h4>
 			<div v-if="showShareButtons">
-				Tell your friends to add their voice! Share this campaign with them on your social media channels.
+				Tell your friends to add their voice! Share this with them on your social media channels.
 				<social-share-buttons></social-share-buttons>
 			</div>
 			<div v-else>

@@ -8,7 +8,7 @@
             </div>
         </div>
         <div v-show="widgetData.position === '*' && currentIndex === 0" class="row m-t-sm">
-            <div class="col-sm-12 m-r-n">
+            <div class="col-sm-12">
                 <div class="weigh-in-buttons">
                     <div class="pull-left" style="width: 45%">
                         <button class="btn btn-block pull-left" v-bind:class="[widgetData.userPosition === '+' ? 'btn-success' : 'btn-default']" type="button" @click="setPosition('+')"><i class="fa fa-chevron-circle-up" v-bind:class="[widgetData.userPosition !== '+' ? 'text-success' : '']"></i> SUPPORT</button>
