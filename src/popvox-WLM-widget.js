@@ -1,6 +1,6 @@
 (function () {
 
-    var scriptName = "popvox-WLM-widget-test.js"; //name of this script, used to get reference to own tag
+    var scriptName = "popvox-WLM-widget.js"; //name of this script, used to get reference to own tag
     var jQuery; //noconflict reference to jquery
     var jqueryPath = "https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js";
     var jqueryVersion = "1.8.3";
