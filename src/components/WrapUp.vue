@@ -31,6 +31,7 @@
 				<p class="m-t-md"><a :href="embeddedUrl">{{ embeddedUrl }}</a></p>
 			</div>
 		</div>
+		<div v-if="loadExternalTracker" id="external-script"></div>
 	</div>
 </template>
 <style scoped>
@@ -52,6 +53,17 @@
         mounted: function()
 		{
 			this.messageSent = true
+
+			if (this.loadExternalTracker)
+			{
+				let widget_id = this.widgetData.widgetID
+				let ifrm = document.createElement('iframe')
+            	ifrm.setAttribute('src', '/widgets/get-tracking-data/' + widget_id)
+            	ifrm.style.width = '1px'
+            	ifrm.style.height = '1px'
+            	ifrm.style.border = 0
+            	document.getElementById('external-script').appendChild(ifrm)
+			}
 		}
 	}
 </script>

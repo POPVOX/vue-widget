@@ -15,6 +15,7 @@ export default {
 	currentIndex: 0,
 	widgetTrackURL: '/track/widget',
 	showShareButtons: false,
+	loadExternalTracker: false,
 
 	socialShareData: {
 		share_description: '',

@@ -66,6 +66,7 @@ export default {
 		Store.customField = data.customField
 		Store.showShareButtons = data.showShareButtons
 		Store.socialShareData = data.socialShareData
+		Store.loadExternalTracker = data.loadExternalTracker
 	},
 
 	mapSocialMediaUserDataToStore: () => {
