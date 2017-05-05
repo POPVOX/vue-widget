@@ -12,7 +12,7 @@ export default {
 	introViewComponent: '',
 	allViews: ['Page1', 'Page2', 'Page3', 'Page4', 'Page5', 'WrapUp'],
 	currentView: '',
-	currentIndex: 5,
+	currentIndex: 0,
 	widgetTrackURL: '/track/widget',
 	showShareButtons: false,
 
