@@ -10,7 +10,7 @@
         <div class="col-sm-12">
           <form @submit.prevent="validateForm()">
             <div class="form-group">
-              <p><small><strong>Personalize it:</strong>  A personalized constituent message is one of the most effective ways to influence lawmakers.</small></p>
+              <p class="personalize-intro"><small><strong>Personalize it:</strong>  A personalized constituent message is one of the most effective ways to influence lawmakers.</small></p>
               <textarea name="message" v-model="userData.message" id="pvox-comment" class="form-control" rows="8" v-validate="'required'" :class="{'input': true, 'error': errors.has('message') }"></textarea>
               <label v-show="errors.has('message')" class="error">{{ errors.first('message') }}</label>
               <div class="text-right m-t-sm">

@@ -4,8 +4,8 @@
 			<div class="col-sm-12 widget-footer">
 				<hr>
 				<div class="footer-links">
-					<a href="https://www.popvox.com" class="pull-left text-warning2"><small>powered by POPVOX</small></a>
-					<a href="https://www.popvox.com/privacy" class="pull-right text-warning2"><small>privacy policy</small></a>
+					<a href="https://www.popvox.com" class="pull-left text-warning2" target="_blank"><small>powered by POPVOX</small></a>
+					<a href="https://www.popvox.com/privacy" class="pull-right text-warning2" target="_blank"><small>privacy policy</small></a>
 				</div>
 			</div>
 		</div>

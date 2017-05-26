@@ -87,7 +87,7 @@ export default {
 	        this.$http.post(this.widgetTrackURL, {
 	          step: 'step_2',
 	          sandbox: this.sandbox,
-	          actions: [''],
+	          actions: ['entered_name'],
 	          hash: this.techDetails.visitHash,
 	          email: this.userData.email,
 	          first_name: this.userData.firstName,
